@@ -1,0 +1,19 @@
+{
+	"name" : "nodejs message service",
+	"version" : "0.1.0",
+	"author" : "Terry King <terrykingcha@gmail.com>",
+	"description" : "a message service",
+	"keywords" : ["message service", "message queue"],
+	"license" : "MIT",
+	"scripts" : {
+		"start" : "node ./bin/http-server",
+	},
+    "repository" : {
+        "type": "git",
+        "url": "git@github.com:terrykingcha/njms.git"
+    },
+    "dependencies" : {
+        "log4js" : "0.5.3",
+    },
+	"main" : "index.js"
+}
