@@ -23,7 +23,7 @@ function messageService(action, params) {
 			break;
 	}
 
-	return util.inspect(result);
+	return params.callback + '(' + util.inspect(result) + ')';
 }
 
 module.exports = messageService;

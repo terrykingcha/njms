@@ -10,7 +10,7 @@ function publish(pubid, msgtext, topicname, hostname) {
 		;
 
 	msg.addTopic(topicname, hostname);
-	message = msg.addMessage(msgtext, topicname, hostname);
+	message = msg.addMessage(pubid, msgtext, topicname, hostname);
 	msgid = message.id;
 
 	for (subid in subscribers) {

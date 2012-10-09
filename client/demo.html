@@ -1,0 +1,206 @@
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <script src="reset.js"></script>
+    <script src="event.js"></script>
+    <script src="jsonp.js"></script>
+	<script src="njms.js"></script>
+    <script src="publisher.js"></script>
+    <script src="subscriber.js"></script>
+    <style>
+        label {
+            display: inline-block;
+            padding: 3px 5px;
+            background-color: #DEDEDE;
+            color : black;
+        }
+
+        span {
+            display: inline-block;
+            padding : 3px 5px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>Publisher</legend>
+        <div>
+            <label>host</label><input type="text" id="pubHost" />
+            <label>name</label><input type="text" id="pubName" />
+            <button id="regPub">注册</button>
+        </div>
+        <ul id="pubList"></ul>
+    </fieldset>
+    <fieldset>
+        <legend>Subscriber</legend>
+        <div>
+            <label>host</label><input type="text" id="subHost" />
+            <label>name</label><input type="text" id="subName" />
+            <button id="regSub">注册</button>
+        </div>
+        <ul id="subList"></ul>
+    </fieldset>
+    <fieldset>
+        <legend>Publish</legend>
+        <ul id="pubRes"></ul>
+    </fieldset>
+    <fieldset>
+        <legend>Recieve</legend>
+        <ul id="subRes"></ul>
+    </fieldset>
+
+	<script type="text/javascript">
+        var e_pubHost = $('pubHost'),
+            e_pubName = $('pubName'),
+            e_pubList = $('pubList'),
+            e_pubRes = $('pubRes'),
+            e_subHost = $('subHost'),
+            e_subName = $('subName'),
+            e_subList = $('subList'),
+            e_subRes = $('subRes'),
+            e_regPub = $('regPub'),
+            e_regSub = $('regSub'),
+
+            t_pubItem = [
+                '<label>name</label><span>{{name}}</span>',
+                '<label>id</label><span>{{id}}</span>',
+                '<label>topic</label>',
+                '<input type="text" id="{{id}}-topic" />',
+                '<label>message</label>',
+                '<input type="text" id="{{id}}-message" />',
+                '<button id="{{id}}-btn" onclick="publish(\'{{id}}\')">发布</button>',
+            ],
+            t_subItem = [
+                '<label>name</label><span>{{name}}</span>',
+                '<label>id</label><span>{{id}}</span>'
+            ],
+            t_pubRes = [
+                '<label>pubid</label><span>{{pubid}}</span>',
+                '<label>msgid</label><span>{{msgid}}</span>',
+                '<label>topic</label><span>{{topic}}</span>',
+                '<label>message</label><span>{{message}}</span>',
+                
+            ],
+            t_subRes = [
+                '<label>subid</label><span>{{subid}}</span>',
+                '<label>pubid</label><span>{{pubid}}</span>',
+                '<label>msgid</label><span>{{msgid}}</span>',
+                '<label>topic</label><span>{{topic}}</span>',
+                '<label>message</label><span>{{message}}</span>',
+            ],
+
+            pubs = {},
+            subs = {}
+            ;
+
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        function tmpl(t, d) {
+            var s = t.join('');
+            Object.each(d, function(value, name) {
+                s = s.replace(new RegExp('\\{\\{' + name + '\\}\\}', 'ig'), value);
+            });
+
+            return s;
+        }
+
+        function regPub(host, name) {
+
+            var publisher = njms.createPublisher(host, name);
+
+            publisher.on('registered', function() {
+                var that = this,
+                    e_li = document.createElement('li')
+                    ;
+
+                e_li.innerHTML = tmpl(t_pubItem, {
+                    name : that._name,
+                    id : that._id
+                });
+
+                e_pubList.appendChild(e_li);
+
+                pubs[that._id] = publisher;
+            });
+
+            publisher.on('published', function(msgid, topic, message) {
+                var that = this,
+                    e_li = document.createElement('li')
+                    ;
+
+                e_li.innerHTML = tmpl(t_pubRes, {
+                    msgid : msgid,
+                    topic : topic,
+                    message : message,
+                    pubid : that._id
+                });
+
+                e_pubRes.appendChild(e_li);
+            });
+        }
+
+        function regSub(host, name) {
+
+            var subscriber = njms.createSubscriber(host, name);
+
+            subscriber.on('registered', function() {
+                var that = this,
+                    e_li = document.createElement('li')
+                    ;
+
+                e_li.innerHTML = tmpl(t_subItem, {
+                    name : that._name,
+                    id : that._id
+                });
+
+                e_subList.appendChild(e_li);
+
+                subs[that._id] = subscriber;
+            });
+
+            subscriber.on('recieved', function(msgid, pubid, topic, message) {
+                var that = this,
+                    e_li = document.createElement('li')
+                    ;
+
+                e_li.innerHTML = tmpl(t_subRes, {
+                    msgid : msgid,
+                    pubid : pubid,
+                    topic : topic,
+                    message : message,
+                    subid : that._id
+                });
+
+                e_subRes.appendChild(e_li);
+            });
+
+            subscriber.recieve(true);
+        }
+
+        function publish(id) {
+            var e_topic = $(id + '-topic'),
+                e_message = $(id + '-message')
+                topic = e_topic.value,
+                message = e_message.value,
+                publisher = pubs[id]
+                ;
+
+            if (topic && message && publisher) {
+                publisher.publish(topic, message);
+            }
+
+        }
+
+        njms.config({base : 'http://localhost:8888/'});
+        regPub('wenzisha', 'room1');
+        regPub('wenzisha', 'room2');
+        regPub('wenzisha', 'room3');
+        regSub('wenzisha', 'room1');
+        regSub('wenzisha', 'room2');
+        regSub('wenzisha', 'room3');
+
+    </script>
+</body>
+</html>

@@ -5,7 +5,7 @@ var util = require('util'),
 function recieve(subid, hostname) {
 	var topicname,
 		messages = msg.getSubscriber(subid, hostname).messages,
-		message, msgid, msgtext
+		message, msgid, res
 		;
 
 	if (!(message = messages.shift())) {
@@ -15,13 +15,14 @@ function recieve(subid, hostname) {
 	topicname = message.topic;
 	msgid = message.id;
 
-	if ((msgtext = msg.consumeMessage(subid, msgid, topicname, hostname))) {
+	if ((res = msg.consumeMessage(subid, msgid, topicname, hostname))) {
 		util.debug('recieve a message "' + msgid + '" in ' + hostname + '/' + topicname + ' via "' + subid + '" ');
 		return {
 			code : 0,
 			topic : topicname,
 			id : msgid,
-			message : msgtext
+			message : res[0],
+			pubid : res[1]
 		}
 	} else {
 		return {

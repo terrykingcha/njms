@@ -129,7 +129,7 @@ function getSubscriber(subid, hostname) {
 	}
 }
 
-function addMessage(messageText, topicname, hostname) {
+function addMessage(pubid, messageText, topicname, hostname) {
 	var self = this,
 		msgno = self.__msgno,
 		messages = self.getTopic(topicname, hostname).messages,
@@ -142,6 +142,7 @@ function addMessage(messageText, topicname, hostname) {
 	message = messages[msgid] = {
 		id : msgid,
 		text : messageText,
+		pubid : pubid,
 		sub : {}
 	};
 	util.debug('add message "' + msgid + '" for "' + hostname + '/' + topicname + '"');
@@ -200,12 +201,13 @@ function consumeMessage(subid, msgid, topicname, hostname) {
 	var self = this,
 		message = self.getMessage(msgid, topicname, hostname),
 		msgtext = message.text,
-		msgsub =  message.sub
+		msgsub =  message.sub,
+		pubid = message.pubid
 		;
 
 	if (msgtext && msgsub && msgsub.hasOwnProperty(subid)) {
 		delete msgsub[subid];
-		return msgtext;
+		return [msgtext, pubid];
 	} else {
 		return false;
 	}
