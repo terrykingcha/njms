@@ -1,17 +1,25 @@
 (function(njms, undefined) {
-	var Publisher = function(host, name) {
+	var Publisher = function(host, name, id) {
 		var that = this
 			;
 
 		that._host = host;
 		that._name = name;
+		that._id = id;
 		that._event = new Event('publisher');
 		that._isRegistered = false;
+
+		if (id) {
+			that._event.__id = id;
+			that._isRegistered = true;
+		}
 	}
 
 	Publisher.prototype.register = function() {
 		var that = this
 			;
+
+		if (that._isRegistered) return;
 
 		njms.register({
 			host : that._host,
@@ -24,6 +32,41 @@
 				that.trigger('registered');
 			} else {
 				that.trigger('error', data.code, 'register');
+			}
+		});
+	}
+
+	Publisher.prototype.get = function() {
+		var that = this
+			;
+
+		njms.get({
+			type : 'pub',
+			host : that._host,
+			id : that._id
+		}, function(data) {
+			if (data.code === 0) {
+				that._name = data.name;
+				that.trigger('get');
+			} else {
+				that.trigger('error', data.code, 'get');
+			}
+		});
+	}
+
+	Publisher.prototype.del = function() {
+		var that = this
+			;
+
+		njms.del({
+			type : 'pub',
+			host : that._host,
+			id : that._id
+		}, function(data) {
+			if (data.code === 0) {
+				that.trigger('del');
+			} else {
+				that.trigger('error', data.code, 'del');
 			}
 		});
 	}
@@ -76,6 +119,14 @@
 		var publisher = new Publisher(host, name);
 
 		publisher.register();
+
+		return publisher;
+	}
+
+	njms.getPublisher = function(id, host) {
+		var publisher = new Publisher(host, null, id);
+
+		publisher.get();
 
 		return publisher;
 	}

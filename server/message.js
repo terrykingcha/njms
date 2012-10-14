@@ -32,6 +32,21 @@ function getHost(hostname) {
 	}
 }
 
+function delHost(hostname) {
+	var self = this,
+		hosts = self.__hosts
+		;
+
+	if (hosts.hasOwnProperty(hostname)) {
+		util.debug('del host "' + hostname + '"');
+		hosts[hostname] = null;
+		delete hosts[hostname];
+		return true;
+	} else {
+		throw new Error('no host "' + hostname + '"');
+	}
+}
+
 function addTopic(topicname, hostname) {
 	var self = this,
 		topics = self.getHost(hostname).topics,
@@ -95,6 +110,22 @@ function getPublisher(pubid, hostname) {
 	}
 }
 
+function delPublisher(pubid, hostname) {
+	var self = this,
+		publishers = self.getHost(hostname).publishers
+		;
+
+	if (!publishers.hasOwnProperty(pubid)) {
+		throw new Error('no publisher in "' + hostname + '"');
+	} else {
+		util.debug('del publisher "' + pubid + '" from "' + hostname + '"');
+		publishers[pubid] = null;
+		delete publishers[pubid];
+		return true;
+	}
+}
+
+
 function addSubscriber(subname, hostname) {
 	var self = this,
 		subno = self.__subno,
@@ -126,6 +157,22 @@ function getSubscriber(subid, hostname) {
 	} else {
 		util.debug('get subscriber "' + subid + '" from "' + hostname + '"');
 		return subscribers[subid];
+	}
+}
+
+function delSubscriber(subid, hostname) {
+	var self = this,
+		subscribers = self.getHost(hostname).subscribers, 
+		subscribers
+		;
+
+	if (!subscribers.hasOwnProperty(subid)) {
+		throw new Error('no subscriber in "' + hostname + '"');
+	} else {
+		util.debug('del subscriber "' + subid + '" from "' + hostname + '"');
+		subscribers[subid] = null;
+		delete subscribers[subid];
+		return true;
 	}
 }
 
@@ -178,6 +225,7 @@ function delMessage(msgid, topicname, hostname) {
 
 function listenMessage(msgid, topicname, hostname) {
 	var self = this,
+		hosts = self.__hosts,
 		message = self.getMessage(msgid, topicname, hostname),
 		msgsub = message.sub,
 		intervalId
@@ -186,6 +234,11 @@ function listenMessage(msgid, topicname, hostname) {
 	if (Object.keys(msgsub).length <=0) return;
 
 	intervalId = setInterval(function() {
+		if (!hosts.hasOwnProperty(hostname)) {
+			clearInterval(intervalId);
+			util.debug('suspend listen messages for host "' + hostname + '"');
+		}
+
 		if (Object.keys(msgsub).length <=0) {
 			self.delMessage(msgid, topicname, hostname);
 			clearInterval(intervalId);
@@ -221,12 +274,15 @@ function __create() {
 		__subno : 0,
 		addHost : addHost,
 		getHost : getHost,
+		delHost : delHost,
 		addTopic : addTopic,
 		getTopic : getTopic,
 		addPublisher : addPublisher,
 		getPublisher : getPublisher,
+		delPublisher : delPublisher,
 		addSubscriber : addSubscriber,
 		getSubscriber : getSubscriber,
+		delSubscriber : delSubscriber,
 		addMessage : addMessage,
 		getMessage : getMessage,
 		delMessage : delMessage,

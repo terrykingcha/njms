@@ -1,7 +1,9 @@
 var util = require('util')
 	register = require('./server/register'),
 	publish = require('./server/publish'),
-	recieve = require('./server/recieve')
+	recieve = require('./server/recieve'),
+	get = require('./server/get'),
+	del = require('./server/del')
 	;
 
 function messageService(action, params) {
@@ -17,6 +19,12 @@ function messageService(action, params) {
 			break;
 		case 'recieve' :
 			result = recieve(params.id, params.host);
+			break;
+		case 'get' : 
+			result = get(params.type, params.id,  params.host);
+			break;
+		case 'del' : 
+			result = del(params.type, params.id,  params.host);
 			break;
 		default :
 			result = {code : 99};

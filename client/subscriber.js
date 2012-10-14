@@ -1,17 +1,25 @@
 (function(njms, undefined) {
-	var Subscriber = function(host, name) {
+	var Subscriber = function(host, name, id) {
 		var that = this
 			;
 
 		that._host = host;
 		that._name = name;
+		that._id = id;
 		that._event = new Event('subscriber');
 		that._isRegistered = false;
+
+		if (id) {
+			that._event.__id = id;
+			that._isRegistered = true;
+		}
 	}
 
 	Subscriber.prototype.register = function() {
 		var that = this
 			;
+
+		if (that._isRegistered) return;
 
 		njms.register({
 			host : that._host,
@@ -24,6 +32,41 @@
 				that.trigger('registered');
 			} else {
 				that.trigger('error', data.code, 'register');
+			}
+		});
+	}
+
+	Subscriber.prototype.get = function() {
+		var that = this
+			;
+
+		njms.get({
+			type : 'sub',
+			host : that._host,
+			id : that._id
+		}, function(data) {
+			if (data.code === 0) {
+				that._name = data.name;
+				that.trigger('get');
+			} else {
+				that.trigger('error', data.code, 'get');
+			}
+		});
+	}
+
+	Subscriber.prototype.del = function() {
+		var that = this
+			;
+
+		njms.del({
+			type : 'sub',
+			host : that._host,
+			id : that._id
+		}, function(data) {
+			if (data.code === 0) {
+				that.trigger('del');
+			} else {
+				that.trigger('error', data.code, 'del');
 			}
 		});
 	}
@@ -77,6 +120,14 @@
 		var subscriber = new Subscriber(host, name);
 
 		subscriber.register();
+
+		return subscriber;
+	}
+
+	njms.getSubscriber = function(id, host) {
+		var subscriber = new Subscriber(host, null, id);
+
+		subscriber.get();
 
 		return subscriber;
 	}
