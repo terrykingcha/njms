@@ -71,13 +71,18 @@
 		});
 	}
 
-	Subscriber.prototype.recieve = function(isPolling) {
+	Subscriber.prototype.recieve = function(topic, isPolling) {
 		var that = this
 			;
 
+		if (arguments === 1 && typeof arguments[0] === 'boolean') {
+			isPolling = topic;
+			topic = '';
+		}
+
 		if (!that._isRegistered) {
 			that.once('registered', function() {
-				that.recieve(isPolling);
+				that.recieve(topic, isPolling);
 			});
 		} else {
 			njms.recieve({
@@ -85,12 +90,21 @@
 				id : that._id
 			}, function(data) {
 				if (data.code === 0) {
-					that.trigger('recieved', data.id, data.pubid, data.topic, data.message);
+					if (typeof topic === 'string') {
+						topic = topic.split(',');
+					}
+
+					if (!topic || topic.indexOf(data.topic) > -1) {
+						that.trigger('recieved', data.id, data.pubid, data.topic, data.message);
+					} else {
+						that.recieve(topic, isPolling);
+						return;
+					}
 				} else {
-					//that.trigger('error', data.code, 'recieve');
+					that.trigger('error', data.code, 'recieve');
 				}
 				isPolling && setTimeout(function() {
-					that.recieve(isPolling);
+					that.recieve(topic, isPolling);
 				}, 500);
 			});
 		}

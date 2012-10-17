@@ -9,7 +9,9 @@ function recieve(subid, hostname) {
 		;
 
 	if (!(message = messages.shift())) {
-		return false;
+		return {
+			code : -1
+		};
 	}
 
 	topicname = message.topic;

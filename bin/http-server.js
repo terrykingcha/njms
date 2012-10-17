@@ -33,7 +33,7 @@ http.createServer(function(req, resp){
         action = loc.pathname.replace(baseReg, '').replace(/\/$/, ''),
         params = loc.query;
 
-    util.debug('action=' + action + '; params=' + util.inspect(params));
+    //util.debug('action=' + action + '; params=' + util.inspect(params));
 
     resp.writeHead(200, {'content-type':'text/javascript;charset=utf8'});
     resp.write(njsm(action, params));
