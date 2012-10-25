@@ -40,4 +40,8 @@ http.createServer(function(req, resp){
     resp.end();
 }).listen(options.port);
 
+process.on('uncaughtException', function(err) {
+    util.debug(err);
+})
+
 util.debug('server started at port ' + options.port);

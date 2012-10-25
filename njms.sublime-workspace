@@ -4,8 +4,12 @@
 		"selected_items":
 		[
 			[
+				"peo",
+				"peopleNo"
+			],
+			[
 				"pub",
-				"pubid"
+				"published"
 			],
 			[
 				"re",
@@ -510,44 +514,40 @@
 			[
 				"di",
 				"display"
-			],
-			[
-				"fun",
-				"function"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "client/demo.html",
+			"file": "/D/workspace/github/wenzisha/script/question.js",
 			"settings":
 			{
-				"buffer_size": 6214,
+				"buffer_size": 2651,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "client/njms.js",
+			"file": "/D/workspace/github/wenzisha/script/wait.js",
 			"settings":
 			{
-				"buffer_size": 747,
+				"buffer_size": 1524,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "client/publisher.js",
+			"file": "/D/workspace/github/wenzisha/script/create_room.js",
 			"settings":
 			{
-				"buffer_size": 1747,
+				"buffer_size": 2319,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "client/subscriber.js",
+			"file": "/D/workspace/github/wenzisha/script/join_room.js",
 			"settings":
 			{
-				"buffer_size": 1816,
+				"buffer_size": 2011,
 				"line_ending": "Windows"
 			}
 		}
@@ -580,7 +580,32 @@
 	},
 	"file_history":
 	[
+		"/D/workspace/github/wenzisha/script/common.js",
+		"/D/workspace/github/wenzisha/index.html",
+		"/D/workspace/github/wenzisha/create.html",
+		"/D/workspace/github/wenzisha/join.html",
+		"/D/workspace/github/wenzisha/judge.html",
+		"/D/workspace/github/wenzisha/oni.html",
+		"/D/workspace/github/wenzisha/people.html",
+		"/D/workspace/github/wenzisha/question.html",
+		"/D/workspace/github/wenzisha/wait.html",
+		"/D/workspace/github/wenzisha/words.html",
+		"/D/workspace/github/wenzisha/css/common.css",
+		"/D/workspace/github/njms/bin/http-server.js",
+		"/D/workspace/github/wenzisha/script/judge.js",
+		"/D/workspace/github/wenzisha/script/create_room.js",
+		"/D/workspace/github/wenzisha/script/join_room.js",
 		"/D/workspace/github/njms/server/message.js",
+		"/D/workspace/github/wenzisha/script/words.js",
+		"/D/workspace/github/wenzisha/script/people.js",
+		"/D/workspace/github/wenzisha/script/oni.js",
+		"/D/workspace/github/wenzisha/script/question.js",
+		"/D/workspace/github/wenzisha/script/wait.js",
+		"/D/workspace/github/wenzisha/script/index.js",
+		"/D/workspace/github/njms/client/demo.html",
+		"/D/workspace/github/njms/client/njms.js",
+		"/D/workspace/github/njms/client/publisher.js",
+		"/D/workspace/github/njms/client/subscriber.js",
 		"/D/workspace/github/njms/server/publish.js",
 		"/D/workspace/github/njms/server/recieve.js",
 		"/D/workspace/github/njms/client/jsonp.js",
@@ -590,7 +615,6 @@
 		"/D/workspace/github/njms/server/register.js",
 		"/D/workspace/github/njms/client/min.js",
 		"/D/workspace/github/njms/client/base.js",
-		"/D/workspace/github/njms/client/njms.js",
 		"/D/workspace/github/njms/client/ajax.js",
 		"/D/workspace/taobao/etao/iTaobao/less/var.less",
 		"/D/workspace/taobao/etao/iTaobao/less/base.less",
@@ -683,31 +707,7 @@
 		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/libs/handlebars/package.json",
 		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/libs/less/package.json",
 		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/libs/seajs/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/libs/underscore/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/demos/user/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/core/base/message/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/core/base/reset/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/core/ui/component/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/core/ui/template/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/core/util/detect/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/TBH5PadComponents/button/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/core/base/class/README.md",
-		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/core/base/class/package.json",
-		"/C/Users/zhuxun.jb/.spm/sources/spm.assets.m.etao.net-8001/mix/core/base/class/1.0.0/src/class.js",
-		"/D/workspace/taobao/etao/Mobile_In_X/TBH5PadComponents/text/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/TBH5PadComponents/toast/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/TBH5PadComponents/navibar/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/TBH5PadComponents/button/.monitor",
-		"/D/workspace/taobao/etao/Mobile_In_X/TBH5PadComponents/navibar/.monitor",
-		"/C/Users/zhuxun.jb/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/zhuxun.jb/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/C/Users/zhuxun.jb/AppData/Roaming/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
-		"/D/workspace/taobao/etao/Mobile_In_X/master/mix.sublime-project",
-		"/D/workspace/taobao/etao/Mobile_In_X/master/components/text/examples/text.html",
-		"/D/workspace/taobao/etao/Mobile_In_X/master/tools/projinit/src/init.js",
-		"/D/workspace/taobao/etao/Mobile_In_X/master/tools/projinit/project/index.html",
-		"/D/workspace/taobao/etao/Mobile_In_X/master/tools/test/package.json",
-		"/D/workspace/taobao/etao/Mobile_In_X/master/tools/test/seajsConf.js"
+		"/D/workspace/taobao/etao/Mobile_In_X/mixteam/libs/underscore/package.json"
 	],
 	"find":
 	{
@@ -725,6 +725,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"joined",
 			"Publisher",
 			"has",
 			"undef",
@@ -851,8 +852,7 @@
 			"this.routes",
 			"this.checkUrl",
 			"this.handlers",
-			"handlers",
-			"keys"
+			"handlers"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -925,52 +925,23 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "client/demo.html",
+					"file": "/D/workspace/github/wenzisha/script/question.js",
 					"settings":
 					{
-						"buffer_size": 6214,
+						"buffer_size": 2651,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2845,
-								2845
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 990.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "client/njms.js",
-					"settings":
-					{
-						"buffer_size": 747,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								492,
-								492
+								735,
+								735
 							]
 						],
 						"settings":
@@ -985,53 +956,82 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "client/publisher.js",
+					"buffer": 1,
+					"file": "/D/workspace/github/wenzisha/script/wait.js",
 					"settings":
 					{
-						"buffer_size": 1747,
+						"buffer_size": 1524,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								445,
-								472
+								1090,
+								1090
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 357.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/D/workspace/github/wenzisha/script/create_room.js",
+					"settings":
+					{
+						"buffer_size": 2319,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1954,
+								1959
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1275.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "client/subscriber.js",
+					"file": "/D/workspace/github/wenzisha/script/join_room.js",
 					"settings":
 					{
-						"buffer_size": 1816,
+						"buffer_size": 2011,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								939,
-								939
+								1076,
+								1076
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 357.0,
+						"translation.y": 714.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1098,7 +1098,7 @@
 		[
 			[
 				"",
-				"/D/workspace/github/github.sublime-project"
+				"/D/workspace/taobao/etao/w_Wireless/base/etao-base.sublime-project"
 			]
 		],
 		"width": 380.0
